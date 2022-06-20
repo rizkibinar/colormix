@@ -26,43 +26,42 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.viewRed.setOnClickListener {
-            Log.d(MainActivity::class.java.simpleName, "Merah 1 Terpilih")
-            selectViewPertama(binding.viewRed,0)
+        binding.apply {
+            viewRed.setOnClickListener {
+                Log.d(MainActivity::class.java.simpleName, "Merah 1 Terpilih")
+                selectViewPertama(binding.viewRed,0)
+            }
+            viewBlue.setOnClickListener {
+                Log.d(MainActivity::class.java.simpleName, "Biru 1 Terpilih")
+                selectViewPertama(binding.viewBlue,1)
+            }
+            viewGreen.setOnClickListener {
+                Log.d(MainActivity::class.java.simpleName, "Hijau 1 Terpilih")
+                selectViewPertama(binding.viewGreen,2)
+            }
+
+            viewRed2.setOnClickListener {
+                Log.d(MainActivity::class.java.simpleName, "Merah 2 Terpilih")
+                selectViewKedua(binding.viewRed2,0)
+            }
+
+            viewBlue2.setOnClickListener {
+                Log.d(MainActivity::class.java.simpleName, "Biru 2 Terpilih")
+                selectViewKedua(binding.viewBlue2,1)
+            }
+
+            viewGreen2.setOnClickListener {
+                Log.d(MainActivity::class.java.simpleName, "Hijau 2 Terpilih")
+                selectViewKedua(binding.viewGreen2, 2)
+            }
+
+            ivReset.setOnClickListener {
+                clearViewPertama()
+                clearViewKedua()
+                binding.viewResult.setBackgroundColor(Color.parseColor("#000000"))
+
+            }
         }
-
-        binding.viewBlue.setOnClickListener {
-            Log.d(MainActivity::class.java.simpleName, "Biru 1 Terpilih")
-            selectViewPertama(binding.viewBlue,1)
-        }
-
-        binding.viewGreen.setOnClickListener {
-            Log.d(MainActivity::class.java.simpleName, "Hijau 1 Terpilih")
-            selectViewPertama(binding.viewGreen,2)
-        }
-
-        binding.viewRed2.setOnClickListener {
-            Log.d(MainActivity::class.java.simpleName, "Merah 2 Terpilih")
-            selectViewKedua(binding.viewRed,0)
-        }
-
-        binding.viewBlue2.setOnClickListener {
-            Log.d(MainActivity::class.java.simpleName, "Biru 2 Terpilih")
-            selectViewKedua(binding.viewBlue2,1)
-        }
-
-        binding.viewGreen2.setOnClickListener {
-            Log.d(MainActivity::class.java.simpleName, "Hijau 2 Terpilih")
-            selectViewKedua(binding.viewGreen2, 2)
-        }
-
-        binding.ivReset.setOnClickListener {
-            clearViewPertama()
-            clearViewKedua()
-            binding.viewResult.setBackgroundColor(Color.parseColor("#000000"))
-
-        }
-
     }
 
     private fun selectViewPertama(view: ImageView, pilihan : Int) {
@@ -80,15 +79,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clearViewPertama() {
-        binding.viewRed.setImageResource(0)
-        binding.viewBlue.setImageResource(0)
-        binding.viewGreen.setImageResource(0)
+        binding.apply {
+            viewRed.setImageResource(0)
+            viewBlue.setImageResource(0)
+            viewGreen.setImageResource(0)
+        }
     }
 
     private fun clearViewKedua() {
-        binding.viewRed2.setImageResource(0)
-        binding.viewBlue2.setImageResource(0)
-        binding.viewGreen2.setImageResource(0)
+        binding.apply {
+            viewRed2.setImageResource(0)
+            viewBlue2.setImageResource(0)
+            viewGreen2.setImageResource(0)
+        }
     }
 
     private fun hitungWarna() {
