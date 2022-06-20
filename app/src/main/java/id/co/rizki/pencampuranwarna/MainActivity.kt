@@ -6,16 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import id.co.rizki.pencampuranwarna.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var warnaMerah1 : ImageView
-    lateinit var warnaMerah2 : ImageView
-    lateinit var warnaBiru1 : ImageView
-    lateinit var warnaBiru2 : ImageView
-    lateinit var warnaHijau1 : ImageView
-    lateinit var warnaHijau2  : ImageView
-    lateinit var warnaHasil  : ImageView
+    private lateinit var binding : ActivityMainBinding
 
     // -1 kosong, 0 merah, 1 biru, 2 hijau
     var warnaTerpilih1 = -1
@@ -27,54 +22,44 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        warnaMerah1 = findViewById<ImageView>(R.id.view_red)
-        warnaMerah2 = findViewById<ImageView>(R.id.view_red2)
-        warnaBiru1 = findViewById<ImageView>(R.id.view_blue)
-        warnaBiru2 = findViewById<ImageView>(R.id.view_blue2)
-        warnaHijau1 = findViewById<ImageView>(R.id.view_green)
-        warnaHijau2 = findViewById<ImageView>(R.id.view_green2)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        warnaHasil = findViewById<ImageView>(R.id.view_result)
-
-        val reset = findViewById<ImageView>(R.id.iv_reset)
-
-
-        warnaMerah1.setOnClickListener {
+        binding.viewRed.setOnClickListener {
             Log.d(MainActivity::class.java.simpleName, "Merah 1 Terpilih")
-            selectViewPertama(warnaMerah1,0)
+            selectViewPertama(binding.viewRed,0)
         }
 
-        warnaBiru1.setOnClickListener {
+        binding.viewBlue.setOnClickListener {
             Log.d(MainActivity::class.java.simpleName, "Biru 1 Terpilih")
-            selectViewPertama(warnaBiru1,1)
+            selectViewPertama(binding.viewBlue,1)
         }
 
-        warnaHijau1.setOnClickListener {
+        binding.viewGreen.setOnClickListener {
             Log.d(MainActivity::class.java.simpleName, "Hijau 1 Terpilih")
-            selectViewPertama(warnaHijau1,2)
+            selectViewPertama(binding.viewGreen,2)
         }
 
-        warnaMerah2.setOnClickListener {
+        binding.viewRed2.setOnClickListener {
             Log.d(MainActivity::class.java.simpleName, "Merah 2 Terpilih")
-            selectViewKedua(warnaMerah2,0)
+            selectViewKedua(binding.viewRed,0)
         }
 
-        warnaBiru2.setOnClickListener {
+        binding.viewBlue2.setOnClickListener {
             Log.d(MainActivity::class.java.simpleName, "Biru 2 Terpilih")
-            selectViewKedua(warnaBiru2,1)
+            selectViewKedua(binding.viewBlue2,1)
         }
 
-        warnaHijau2.setOnClickListener {
+        binding.viewGreen2.setOnClickListener {
             Log.d(MainActivity::class.java.simpleName, "Hijau 2 Terpilih")
-            selectViewKedua(warnaHijau2, 2)
+            selectViewKedua(binding.viewGreen2, 2)
         }
 
-        reset.setOnClickListener {
+        binding.ivReset.setOnClickListener {
             clearViewPertama()
             clearViewKedua()
-            warnaHasil.setBackgroundColor(Color.parseColor("#000000"))
+            binding.viewResult.setBackgroundColor(Color.parseColor("#000000"))
 
         }
 
@@ -95,25 +80,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clearViewPertama() {
-        warnaMerah1.setImageResource(0)
-        warnaBiru1.setImageResource(0)
-        warnaHijau1.setImageResource(0)
+        binding.viewRed.setImageResource(0)
+        binding.viewBlue.setImageResource(0)
+        binding.viewGreen.setImageResource(0)
     }
 
     private fun clearViewKedua() {
-        warnaMerah2.setImageResource(0)
-        warnaBiru2.setImageResource(0)
-        warnaHijau2.setImageResource(0)
+        binding.viewRed2.setImageResource(0)
+        binding.viewBlue2.setImageResource(0)
+        binding.viewGreen2.setImageResource(0)
     }
 
     private fun hitungWarna() {
         if(warnaTerpilih1 >=0 && warnaTerpilih2 >= 0) {
             if(warnaTerpilih1 == merah && warnaTerpilih2 == biru || warnaTerpilih1 == biru && warnaTerpilih2 == merah) {
-                warnaHasil.setBackgroundColor(Color.parseColor("#ff00ff"))
+                binding.viewResult.setBackgroundColor(Color.parseColor("#ff00ff"))
             } else if(warnaTerpilih1 == merah && warnaTerpilih2 == hijau || warnaTerpilih1 == hijau && warnaTerpilih2 == merah) {
-                warnaHasil.setBackgroundColor(Color.parseColor("#ffff00"))
+                binding.viewResult.setBackgroundColor(Color.parseColor("#ffff00"))
             } else if(warnaTerpilih1 == biru && warnaTerpilih2 == hijau || warnaTerpilih1 == hijau && warnaTerpilih2 == biru) {
-                warnaHasil.setBackgroundColor(Color.parseColor("#00ffff"))
+                binding.viewResult.setBackgroundColor(Color.parseColor("#00ffff"))
             }
         }
     }
